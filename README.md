@@ -1,4 +1,4 @@
-# Just Another Computer Science Study Notes
+# Just Another Computer Science Study Project
 
 ## Planned:
 ### Basics:
