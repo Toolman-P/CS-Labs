@@ -4,7 +4,7 @@
 ### Basics:
 - [ ] 15-217 Introduction to Computer Systems (CMU)
 - [ ] 18-447 Introduction to Computer Architecture (CMU)
-- [ ] CS144 Introduction to Computer Networks (MIT)
+- [ ] CS144 Introduction to Computer Networks (Stanford)
 - [ ] 6.004 Computation Structures (MIT)
 - [ ] cs194-15 Introduction to Parallel Programming (UCB)
 ### Computer Vision and Machine Learning
