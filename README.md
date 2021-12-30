@@ -2,7 +2,7 @@
 
 ## Planned:
 ### Basics:
-- [ ] 15-217 Introduction to Computer Systems (CMU)
+- [ ] 15-213 Introduction to Computer Systems (CMU)
 - [ ] 18-447 Introduction to Computer Architecture (CMU)
 - [ ] CS144 Introduction to Computer Networks (Stanford)
 - [ ] 6.004 Computation Structures (MIT)
