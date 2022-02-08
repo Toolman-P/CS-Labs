@@ -4,3 +4,6 @@
 
 ### PreRequisite
 
+``` shell
+objdump -d bomb > bomb.s
+```
