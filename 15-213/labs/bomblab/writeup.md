@@ -6,4 +6,9 @@
 
 ``` shell
 objdump -d bomb > bomb.s
+gdb bomb
+```
+
+``` gdb
+si --- step instruction
 ```

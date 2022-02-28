@@ -36,8 +36,8 @@ void naive_rotate(int dim, pixel *src, pixel *dst)
     int i, j;
 
     for (i = 0; i < dim; i++)
-	for (j = 0; j < dim; j++)
-	    dst[RIDX(dim-1-j, i, dim)] = src[RIDX(i, j, dim)];
+	    for (j = 0; j < dim; j++)
+	        dst[RIDX(dim-1-j, i, dim)] = src[RIDX(i, j, dim)];
 }
 
 /* 
@@ -47,7 +47,12 @@ void naive_rotate(int dim, pixel *src, pixel *dst)
 char rotate_descr[] = "rotate: Current working version";
 void rotate(int dim, pixel *src, pixel *dst) 
 {
-    naive_rotate(dim, src, dst);
+    int i,j,ii,jj;
+    for (i=0;i<dim;i+=16)
+        for(j=0;j<dim;j+=16)
+            for(ii=i;ii<i+16;ii++)
+                for(jj=j;jj<j+16;jj++)
+	                dst[RIDX(dim-1-jj, ii, dim)] = src[RIDX(ii, jj, dim)];
 }
 
 /*********************************************************************
@@ -84,18 +89,18 @@ typedef struct {
 } pixel_sum;
 
 /* Compute min and max of two integers, respectively */
-static int min(int a, int b) { return (a < b ? a : b); }
-static int max(int a, int b) { return (a > b ? a : b); }
+inline static int min(int a, int b) { return (a < b ? a : b); }
+inline static int max(int a, int b) { return (a > b ? a : b); }
 
 /* 
  * initialize_pixel_sum - Initializes all fields of sum to 0 
  */
-static void initialize_pixel_sum(pixel_sum *sum) 
-{
-    sum->red = sum->green = sum->blue = 0;
-    sum->num = 0;
-    return;
-}
+// static void initialize_pixel_sum(pixel_sum *sum) 
+// {
+//     sum->red = sum->green = sum->blue = 0;
+//     sum->num = 0;
+//     return;
+// }
 
 /* 
  * accumulate_sum - Accumulates field values of p in corresponding 
@@ -124,18 +129,24 @@ static void assign_sum_to_pixel(pixel *current_pixel, pixel_sum sum)
 /* 
  * avg - Returns averaged pixel value at (i,j) 
  */
-static pixel avg(int dim, int i, int j, pixel *src) 
+inline static pixel avg(int dim, int i, int j, pixel *src) 
 {
     int ii, jj;
     pixel_sum sum;
     pixel current_pixel;
-
-    initialize_pixel_sum(&sum);
-    for(ii = max(i-1, 0); ii <= min(i+1, dim-1); ii++) 
-	for(jj = max(j-1, 0); jj <= min(j+1, dim-1); jj++) 
-	    accumulate_sum(&sum, src[RIDX(ii, jj, dim)]);
-
-    assign_sum_to_pixel(&current_pixel, sum);
+    sum.blue=sum.green=sum.red=sum.num=0;
+    // initialize_pixel_sum(&sum);
+    for(ii = max(0,i-1); ii <= min(dim-1,i+1); ii++) 
+	    for(jj = max(0,j-1); jj <= min(dim-1,j+1); jj++) 
+	        {   
+                sum.red+=src[RIDX(ii, jj, dim)].red;
+                sum.green+=src[RIDX(ii,jj, dim)].green;
+                sum.blue+=src[RIDX(ii,jj,dim)].blue;
+                sum.num++;
+            }
+    current_pixel.red = (unsigned short) (sum.red/sum.num);
+    current_pixel.green = (unsigned short) (sum.green/sum.num);
+    current_pixel.blue = (unsigned short) (sum.blue/sum.num);
     return current_pixel;
 }
 
@@ -152,8 +163,8 @@ void naive_smooth(int dim, pixel *src, pixel *dst)
     int i, j;
 
     for (i = 0; i < dim; i++)
-	for (j = 0; j < dim; j++)
-	    dst[RIDX(i, j, dim)] = avg(dim, i, j, src);
+	    for (j = 0; j < dim; j++)
+	        dst[RIDX(i, j, dim)] = avg(dim, i, j, src);
 }
 
 /*
@@ -161,9 +172,16 @@ void naive_smooth(int dim, pixel *src, pixel *dst)
  * IMPORTANT: This is the version you will be graded on
  */
 char smooth_descr[] = "smooth: Current working version";
-void smooth(int dim, pixel *src, pixel *dst) 
-{
-    naive_smooth(dim, src, dst);
+void smooth(int dim, pixel *src, pixel *dst)
+{ 
+    int i,j,k,l;    
+    // seperate the corners, the edges and the center part.
+    // I dont like to write dupilicates So i skipped. 
+    for (i = 0; i < dim; i+=16)
+	    for (j = 0; j < dim; j+=16)
+            for(k=i;k<i+16;k++)
+                for(l=j;l<j+16;l++)
+                    dst[RIDX(k, l, dim)] = avg(dim, k, l, src);
 }
 
 

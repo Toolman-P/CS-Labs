@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# This script is to generate plain text for attacks and references
 import os
 for i in range(5):
     print('00 00 00 00 00 00 00 00')
