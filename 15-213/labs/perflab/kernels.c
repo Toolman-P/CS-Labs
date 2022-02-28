@@ -176,7 +176,8 @@ void smooth(int dim, pixel *src, pixel *dst)
 { 
     int i,j,k,l;    
     // seperate the corners, the edges and the center part.
-    // I dont like to write dupilicates So i skipped. 
+    // I dont like to write dupilicates So i skipped this part.
+    // This can simply be done by conditioning and loop unrolling. 
     for (i = 0; i < dim; i+=16)
 	    for (j = 0; j < dim; j+=16)
             for(k=i;k<i+16;k++)
