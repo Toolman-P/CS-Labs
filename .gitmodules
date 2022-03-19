@@ -1,3 +1,6 @@
 [submodule "How-To-Ask-Questions-The-Smart-Way"]
 	path = How-To-Ask-Questions-The-Smart-Way
 	url = git@github.com:tvvocold/How-To-Ask-Questions-The-Smart-Way.git
+[submodule "nju-ics2021"]
+	path = nju-ics2021
+	url = git@github.com:Toolman-P/nju-ics2021.git
