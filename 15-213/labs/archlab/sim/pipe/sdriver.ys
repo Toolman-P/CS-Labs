@@ -33,21 +33,33 @@ ncopy:
 	andq %rdx,%rdx		# len <= 0?
 	jle Done		# if so, goto Done:
 
-Loop:	
-	mrmovq (%rdi), %r10	# read val from src...
-	rmmovq %r10, (%rsi)	# ...and store it to dst
-	andq %r10, %r10		# val <= 0?
+Loop:
+	irmovq $0xFFFFFFFE,%r8	
+	mrmovq (%rdi), %r9	# read val from src...
+	mrmovq 8(%rdi),%r10
+	rmmovq %r9, (%rsi)	# ...and store it to dst
+	rmmovq %r10,8(%rsi)
+	andq %r9, %r9		# val <= 0?
+	jle test
+	iaddq $1, %rax
+test:
+	andq %r10,%r10
 	jle Npos		# if so, goto Npos:
-	#irmovq $1, %r10
 	iaddq $1, %rax		# count++
 Npos:	
-	irmovq $1, %r10
-	subq %r10, %rdx		# len--
-	irmovq $8, %r10
-	addq %r10, %rdi		# src++
-	addq %r10, %rsi		# dst++
-	andq %rdx,%rdx		# len > 0?
-	jg Loop			# if so, goto Loop:
+	iaddq $-2, %rdx		# len-=2
+	iaddq $16, %rdi		# src+=2
+	iaddq $16, %rsi		# dst+=2 
+	andq %rdx,%r8		# len>1?
+	jg Loop	
+	andq %rdx,%rdx
+	jle End		# len > 0?
+	mrmovq 8(%rdi),%r10
+	rmmovq %r10,8(%rsi)
+	andq %r10,%r10
+	jle End
+	iaddq $1, %rax
+End: 					# if so, goto Loop:
 ##################################################################
 # Do not modify the following section of code
 # Function epilogue.
@@ -64,9 +76,9 @@ EndFun:
 ###############################
 	.align 8
 src:
-	.quad 1
+	.quad -1
 	.quad -2
-	.quad -3
+	.quad 3
 	.quad 4
 	.quad 0xbcdefa # This shouldn't get moved
 
