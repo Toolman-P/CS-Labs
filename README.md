@@ -22,7 +22,6 @@
 ### Architecture and Systems
 
 - [ ] 18-742 Advanced Computer Architecture (CMU)
-- [ ] 6.828 Operating System (MIT)
 - [ ] 6.S081 Operating System Engineering (MIT)
 - [ ] 6.824 Distributed Systems (MIT)
 

@@ -1,2 +1,0 @@
-lea %rsp,%rax
-ret
