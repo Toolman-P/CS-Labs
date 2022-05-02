@@ -1,4 +1,4 @@
-# Just Another Computer Science Study Project
+# Yet Another Computer Science Study Project
 
 ## Planned
 
@@ -12,11 +12,10 @@
 
 ### Computer Vision and Machine Learning
 
-- [ ] cs231n Introduction to Convolutional Neural Networks for Visual Recognition (Stanford)
+- [x] cs231n Introduction to Convolutional Neural Networks for Visual Recognition (Stanford)
 - [ ] cs229 Machine Learning (Stanford)
 - [ ] cs230 Deep Learning (Stanford)
 - [ ] cs230 Neural Networks and Deep Learning (Stanford)
-- [ ] AI For Medicine (Cousera)
 - [ ] Deep Learning with PyTorch for Medical Image Analysis (Bilibili)
   
 ### Architecture and Systems
