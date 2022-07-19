@@ -3,13 +3,10 @@
 	url = git@github.com:tvvocold/How-To-Ask-Questions-The-Smart-Way.git
 [submodule "nju-ics2021"]
 	path = nju-ics2021
-	url = git@github.com:Toolman-P/nju-ics2021.git
+	url = git@github.com:ToolmanP/nju-ics2021.git
 [submodule "nju-os2022"]
 	path = nju-os2022
-	url = git@github.com:Toolman-P/nju-os2022.git
-[submodule "CSAPP-Labs"]
-	path = CSAPP-Labs
-	url = git@github.com:Toolman-P/CSAPP-Labs.git
+	url = git@github.com:ToolmanP/nju-os2022.git
 [submodule "15-213"]
 	path = 15-213
-	url = https://github.com/Toolman-P/CSAPP-Labs
+	url = git@github.com:ToolmanP/CSAPP-Labs.git
